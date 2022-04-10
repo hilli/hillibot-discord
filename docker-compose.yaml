@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  hillibot-discord:
+    # image: hilli/hillibot-discord
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hillibot-discord
+    hostname: hillibot-discord
+    restart: unless-stopped
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
