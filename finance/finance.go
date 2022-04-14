@@ -3,6 +3,7 @@ package finance
 import (
 	"bytes"
 	"fmt"
+	"os"
 	"strings"
 	"time"
 
@@ -31,12 +32,12 @@ func RenderedGraphForSymbols(symbols []string, buffer *bytes.Buffer) {
 	}
 	graph.Render(wc.PNG, buffer)
 	// Debug write to file as well
-	// f, err := os.OpenFile("finance.png", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
-	// if err != nil {
-	// 		panic(err)
-	// }
-	// defer f.Close()
-	// graph.Render(wc.PNG, f)
+	f, err := os.OpenFile("finance.png", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
+	if err != nil {
+			panic(err)
+	}
+	defer f.Close()
+	graph.Render(wc.PNG, f)
 }
 
 func getSymbolInfo(symbolList []string) string {
